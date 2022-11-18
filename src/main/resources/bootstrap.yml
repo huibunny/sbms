@@ -1,5 +1,5 @@
 server:
-  port: 8910
+  port: 8988
 spring:
   profiles:
     active: dev
@@ -20,7 +20,7 @@ spring:
         watch: 
           enabled: false
         format: YAML
-        defaultContext: sbms
+        defaultContext: application
         profileSeparator: '-'
       discovery:
         instanceId: ${spring.application.name}:${server.port}
@@ -34,17 +34,5 @@ spring:
           doc-api: /doc.html
   config:
     import: optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}
-swagger:
-  enable: true  
-  title: SBMS API Document
-  group-name: sbms
-  base-package: com.zk.nebula.flow.controller
-  application-name: ${spring.application.name}
-  application-version: ${spring.application.version}
-  application-description: SBMS API Document
-  try-host: http://${server.address}:${server.port}
-  author: Henry
-  author-url: https://www.google.com.hk/
-  author-email: cc@Henry.dev
 knife4j:
     enable: true

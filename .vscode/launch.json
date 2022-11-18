@@ -8,7 +8,7 @@
             "type": "java",
             "name": "sbms",
             "request": "launch",
-            "mainClass": "com.zk.nebula.flow.App",
+            "mainClass": "com.hb.ms.App",
             "projectName": "sbms"
         }
     ]
