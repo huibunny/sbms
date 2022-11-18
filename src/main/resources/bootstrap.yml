@@ -1,0 +1,50 @@
+server:
+  port: 8910
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sbms
+    version: 0.1
+  cloud:
+    loadbalencer:
+      ribbon:
+        enabled: false
+    consul:
+      host: dog.ap
+      port: 8500
+      config:   
+        prefix: dev
+        fail-fast: true     
+        enabled: true
+        watch: 
+          enabled: false
+        format: YAML
+        defaultContext: sbms
+        profileSeparator: '-'
+      discovery:
+        instanceId: ${spring.application.name}:${server.port}
+        healthCheckPath: /health-check
+        healthCheckInterval: 3s
+        catalog-services-watch-delay: 3000
+        catalogServicesWatch:
+          enabled: true
+        tags: 'urlprefix-/${spring.application.name} strip=/${spring.application.name}'
+        metadata:
+          doc-api: /doc.html
+  config:
+    import: optional:consul:${spring.cloud.consul.host}:${spring.cloud.consul.port}
+swagger:
+  enable: true  
+  title: SBMS API Document
+  group-name: sbms
+  base-package: com.zk.nebula.flow.controller
+  application-name: ${spring.application.name}
+  application-version: ${spring.application.version}
+  application-description: SBMS API Document
+  try-host: http://${server.address}:${server.port}
+  author: Henry
+  author-url: https://www.google.com.hk/
+  author-email: cc@Henry.dev
+knife4j:
+    enable: true
